@@ -16,7 +16,7 @@
     * [Illustration of Signed and Unsigned Numbers in RISC-V](#illustration-of-signed-and-unsigned-numbers-in-risc-v)
         + [Unsigned Numbers](#unsigned-numbers-1)
         + [Signed Numbers](#signed-numbers-1)
-        
+
 - [Day - 2 : ]
 - [Day - 3 : ]
 - [Day - 4 : ]
@@ -232,8 +232,10 @@ int main()
 }
 ```
 ___
-***Note**
+***Note**</br.>
+
 **%llu** - is the format specifier for 64-bit unsigned integer.
+
 **%lld** - is the format specifier for 64-bit signed integer.
 
 Uncomment the lines in the code appropriately and view the result.
