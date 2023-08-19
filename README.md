@@ -72,13 +72,9 @@ When a C program needs to run on a hardware chip, it goes through a series of st
 
 To make an application work on the hardware, it has to pass through the software system. Here, the system software comes into play, which includes the Operating System (OS), compiler, and assembler. The OS handles tasks like input/output and memory allocation, while the compiler turns the high-level code (like C or C++) into a set of instructions. These instructions depend on the hardware's structure. For a RISC-V system, the instructions follow the RISC-V architecture. The assembler then takes these instructions and turns them into a binary form, which is basically a machine language program. This binary representation is what the hardware ultimately receives and processes. These instructions act as a link between the C language and the intricate hardware components. This link is formally called the Instruction Set Architecture (ISA). In hardware's language, only 0s and 1s make sense, and they serve as the foundation for communication between software and hardware.
 
+### Illustration of the RISC-V 
 
-```
-cd /home/kanish/RISCV-ISA/riscv_isa_labs/day_1/lab1
-riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o sum1ton_O1.o sum1ton.c
-riscv64-unknown-elf-objdump -d sum1ton_O1.o | less
-spike pk sum1ton_O1.o 
-```
+Consider the simple C program given below which calculates the sum of the number form 1 to n. 
 
 ```
 #include<stdio.h>
@@ -91,13 +87,56 @@ int main()
     return 0;
 }
 ```
+In order to map this command to riscv based assembly language compile it using the riscv-gnu-toolchain shown below
+
+```
+cd /home/kanish/RISCV-ISA/riscv_isa_labs/day_1/lab1
+riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o sum1ton_O1.o sum1ton.c
+riscv64-unknown-elf-objdump -d sum1ton_O1.o | less
+spike pk sum1ton_O1.o 
+```
+
+___
+**riscv64-unknown-elf-gcc** - RISC-V architecture based gcc compiler .
+
+**-O1/-Ofast** - This flag specifies the optimization level to be used during compilation. In this case, the level is set to 1, which represents a basic level of optimization. Higher optimization levels (like -O2 or -O3) can potentially result in more optimized and faster code, but they might also increase compilation time.-Ofast is an optimization level flag used in GCC (GNU Compiler Collection) to enable aggressive optimizations that go beyond the optimizations performed by -O3.
+
+**-mabi=lp64** - Specify integer and floating-point calling convention. ABI-string contains two parts: the size of integer types and the registers used for floating-point types. "lp64" ABI stands for "Long and Pointer 64-bit," indicating that long integers and pointers are 64 bits in size.
+
+**-march=rv64i** - Generate code for given RISC-V ISA. ISA strings must be lower-case. Examples include ‘rv64i’, ‘rv32g’, ‘rv32e’, and ‘rv32imaf’. In this case, "rv64i" specifies a 64-bit RISC-V architecture with the "i" extension, which denotes the base integer instruction set.
+
+**-o sum1ton_O1.o** - This flag indicates the name of the output file after compilation. In this case, the compiled code will be saved as "sum1ton_O1.o".
+
+**sum1ton.c** - This is the source code file that you want to compile. In this case, it's named "sum1ton.c".
+
+**riscv64-unknown-elf-objdump** - This is the command-line utility used for examining the contents of object files, executables, and libraries. It can provide information about the disassembled machine code, symbol tables, and more.
+
+**-d** - This flag specifies that the disassembly mode should be used. In other words, you are requesting to see the disassembled machine code instructions corresponding to the binary content in the object file.
+
+**sum1ton_O1.o** - This is the object file that you want to disassemble. It contains the compiled machine code generated from the "sum1ton.c" source code file using the specified compiler options.
+
+**spike** -  Spike is a RISC-V ISA simulator that emulates the behavior of a RISC-V processor. It's used to run RISC-V binary programs on a host machine, simulating how those programs would execute on actual RISC-V hardware.
+
+**pk** - The "proxy kernel" (pk) is a small user-mode runtime environment that provides a basic set of functionalities needed to execute programs in the Spike simulator. It serves as a minimal operating system interface for the simulated environment. The proxy kernel handles basic interactions with the simulated environment, such as managing memory, handling system calls, and providing essential runtime support.
+
+___
+
 
 
 To debug line by line
 ```
-spike -d pk sum1ton_O1.o
+spike -d pk sum1ton_O1.o 
+
+# -d  --> indicates spike in debug mode. Debug mode enables you to closely monitor and interact with the simulated program's execution, making it useful for analyzing code behavior, identifying issues, and stepping through instructions.
+
 until pc 0 10184
+
+#continue executing the program until the program counter reaches address 10184. 
+
 reg 0 sp
+
+#Inquire about the value stored in register., in this case it is stack pointer (sp)
+
 #Press enter for line by line execution
 #To check the status of the particular register
 reg 0 a2
@@ -169,3 +208,4 @@ int main()
 1. https://www.eng.biu.ac.il/temanad/digital-vlsi-design/
 2. https://www.arm.com/glossary/isa
 3. https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf
+4. https://gcc.gnu.org/onlinedocs/gcc/RISC-V-Options.html
