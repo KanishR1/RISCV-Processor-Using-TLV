@@ -285,7 +285,7 @@ riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o signedHighest.o unsign
 spike  pk signedHighest.o 
 ```
 **Output of the execution**
-![signed](./riscv_isa_labs/day_1/lab2/images/unsigned_demo.png)
+![signed](./riscv_isa_labs/day_1/lab2/images/signed_demo.png)
 
 [Acknowledgement Section]:#
 ## Acknowledgement
