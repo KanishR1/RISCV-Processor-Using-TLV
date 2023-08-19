@@ -97,6 +97,8 @@ spike pk sum1ton_O1.o
 ```
 
 ___
+***Explanation of the code :***
+
 **riscv64-unknown-elf-gcc** - RISC-V architecture based gcc compiler .
 
 **-O1/-Ofast** - This flag specifies the optimization level to be used during compilation. In this case, the level is set to 1, which represents a basic level of optimization. Higher optimization levels (like -O2 or -O3) can potentially result in more optimized and faster code, but they might also increase compilation time.-Ofast is an optimization level flag used in GCC (GNU Compiler Collection) to enable aggressive optimizations that go beyond the optimizations performed by -O3.
