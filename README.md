@@ -1,5 +1,16 @@
 # RISCV-ISA
 
+## Table of Contents
+- [Day - 1 : ]
+- [Day - 2 : ]
+- [Day - 3 : ]
+- [Day - 4 : ]
+- [Day - 5 : ]
+- [Acknowledgement](#acknowledgement)
+- [References](#references)
+
+## Day - 1 : Software Installation
+
 
 ```
 cd /home/kanish/RISCV-ISA/riscv_isa_labs/day_1/lab1
@@ -83,3 +94,15 @@ int main()
     return 0;
 }
 ```
+
+[Acknowledgement Section]:#
+## Acknowledgement
+1. Kunal Ghosh, VSD Corp. Pvt. Ltd.
+2. Sumanto Kar, Sr. Project Technical Assistant , IIT Bombay
+3. Alwin Shaju, Colleague IIITB
+4. Adam Teman, Associate Professor at Bar-Ilan University in Ramat Gan, Israel   
+
+
+[Reference Section]:#
+## References
+1. https://www.eng.biu.ac.il/temanad/digital-vlsi-design/
