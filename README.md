@@ -17,6 +17,7 @@
         + [Unsigned Numbers](#unsigned-numbers-1)
         + [Signed Numbers](#signed-numbers-1)
 - [Day - 2 : Introduction to ABI and Basic Verification Flow](#day---2--introduction-to-abi-and-basic-verification-flow)
+    * [RV64I Base Integer Instruction Set](#rv64i-base-integer-instruction-set)
 - [Day - 3 : ]
 - [Day - 4 : ]
 - [Day - 5 : ]
@@ -293,6 +294,39 @@ spike  pk signedHighest.o
 
 ## Day - 2 : Introduction to ABI and Basic Verification Flow
 
+### RV64I Base Integer Instruction Set
+RV64I is the base integer instruction set for the 64-bit architecture, which builds upon the RV32I variant. RV64I shares most of the instructions with RV32I but the width of registers is different and there are a few additional instructions only in RV64I. The base integer instruction set has 47 instructions (35 instructions from RV32I and 12 instructions from RV64I). The instructions and their format is shown below :
+
+![rv64i_inst](./riscv_isa_labs/images/rv64i_bis.png)
+
+There are 31 general-purpose registers x1–x31, which hold integer values. Register x0 is hardwired to the constant 0. There is no hardwired subroutine return address link register, but the standard software calling convention uses register x1 to hold the return address on a call. For RV32, the x registers are 32 bits wide, and for RV64, they are 64 bits wide. The term XLEN to refer to the current width of an x register in bits (either 32 or 64).
+
+![rrisc_reg_name](./riscv_isa_labs/images/riscv_reg_name.png)
+
+In the RISC-V instruction set architecture, instructions are categorized into different formats based on their opcode and operand types. These formats are denoted by single-letter abbreviations. Here's an explanation of each type:
+
+- **R-Type (Register Type)** -  These instructions involve operations that operate on two source registers and store the result in a destination register. They include arithmetic, logical, and bitwise operations. The typical format is: opcode rd, rs1, rs2.
+
+- **I-Type (Immediate Type)** - These instructions have an immediate (constant) value as one of their operands, and they work with a source register to perform operations like arithmetic, logical, and memory operations. The typical format is: opcode rd, rs1, imm.
+
+- **S-Type (Store Type)** - S-type instructions are used for storing data into memory. They combine a source register, a destination address (base register), and an immediate offset to determine where the data should be stored. The typical format is: opcode rs2, imm(rs1).
+
+- **B-Type (Branch Type)** - B-type instructions are used for conditional branching. They compare values from two source registers and use an immediate offset to determine the branching target. These instructions support operations like equality, inequality, and comparison. The typical format is: opcode rs1, rs2, imm.
+
+- **U-Type (Upper Immediate Type)** - U-type instructions are used for loading immediate values into registers. They include unconditional jump instructions. These instructions operate on a single source register and use an immediate value to specify the upper bits of the result. The typical format is: opcode rd, imm.
+
+- **J-Type (Jump Type)** J-type instructions are used for unconditional jumps. They involve using an immediate offset to determine the target address of the jump. These instructions are typically used for implementing function calls and other control flow changes. The typical format is: opcode rd, imm.
+
+The instruction format for all types is shown below :
+
+![risc_inst_format](./riscv_isa_labs/images/risc_inst_format.png)
+
+To know more about the instructions check this [link](https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf).
+
+
+
+
+
 [Acknowledgement Section]:#
 ## Acknowledgement
 1. Kunal Ghosh, VSD Corp. Pvt. Ltd.
@@ -308,3 +342,4 @@ spike  pk signedHighest.o
 3. https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf
 4. https://gcc.gnu.org/onlinedocs/gcc/RISC-V-Options.html
 5. https://www.tutorialspoint.com/unsigned-and-signed-binary-numbers
+6. https://book.rvemu.app/instruction-set/01-rv64i.html
