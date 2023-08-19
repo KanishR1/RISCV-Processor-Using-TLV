@@ -1,7 +1,8 @@
 # RISCV-ISA
 
 ## Table of Contents
-- [Day - 1 : ]
+- [Day - 1 : Introduction to RISC-V ISA and GNU compiler toolchain](#day---1--introduction-to-risc-v-isa-and-gnu-compiler-toolchain)
+    * [Tool Installation](#tool-installation)
 - [Day - 2 : ]
 - [Day - 3 : ]
 - [Day - 4 : ]
@@ -9,8 +10,47 @@
 - [Acknowledgement](#acknowledgement)
 - [References](#references)
 
-## Day - 1 : Software Installation
+## Day - 1 : Introduction to RISC-V ISA and GNU compiler toolchain
 
+### Tool Installation
+Install the dependencies using the following command :
+```
+sudo apt-get install libboost-regex-dev
+```
+
+**Steps to install the toolchain**
+```
+git clone https://github.com/kunalg123/riscv_workshop_collaterals.git
+cd riscv_workshop_collaterals
+chmod +x run.sh
+./run.sh
+```
+
+Running this command will result in a make error. Ignore the error and follow the steps given below:
+
+```
+cd ~/riscv_toolchain/iverilog/
+git checkout --track -b v10-branch origin/v10-branch
+git pull 
+chmod 777 autoconf.sh 
+./autoconf.sh 
+./configure 
+make
+sudo make install 
+```
+
+Once the toolchain is installed it is necessary to create a PATH variable in bashrc file. To create the path variable follow the steps given below :
+
+```
+gedit .bashrc
+#Instead of kanish put your username
+
+#Type at last line
+export PATH="/home/kanish/riscv_toolchain/riscv64-unknown-elf-gcc-8.3.0-2019.08.0-x86_64-linux-ubuntu14/bin:$PATH" 
+
+# close the bashrc and type in terminal
+source .bashrc
+```
 
 ```
 cd /home/kanish/RISCV-ISA/riscv_isa_labs/day_1/lab1
