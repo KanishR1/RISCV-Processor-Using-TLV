@@ -385,6 +385,29 @@ spike pk custom1_to9.o
 
 ![dump_op](./riscv_isa_labs/day_2/lab1/images/dump_op_lab.png)
 
+### RISC-V Basic Verification flow using iverilog demo
+For verification of the RISC-V CPU the C code will be converted into HEX file and it will be given to the RISC-V CPU and the output will be displayed and verified. The block diagram is shown below :
+
+![verification_flow](./riscv_isa_labs/images/verification_flow.png)
+
+For demo go to the lab directory using the command given below :
+```
+cd ~/riscv_workshop_collaterals/labs/
+chmod 777 rv32im.sh
+./rv32im.sh  # Contains necessary commands to convert C to hex
+```
+
+**Output, Script(rv32im.sh) and firmare.hex**
+
+![ver_demo](./riscv_isa_labs/day_2/lab1/images/ver_demo.png)
+
+![rv_32im](./riscv_isa_labs/day_2/lab1/images/c_to_hex.png)
+
+![firm](./riscv_isa_labs/day_2/lab1/images/firm.png)
+
+
+
+
 
 [Acknowledgement Section]:#
 ## Acknowledgement
