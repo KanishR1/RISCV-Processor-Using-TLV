@@ -5,6 +5,7 @@
     * [Tool Installation](#tool-installation)
     * [Instruction Set Architecture (ISA)](#instruction-set-architecture-isa)
     * [RISC-V ISA](#riscv-isa)
+    * [Application Software on Hardware flow](#application-software-on-hardware-flow)
 - [Day - 2 : ]
 - [Day - 3 : ]
 - [Day - 4 : ]
@@ -62,6 +63,16 @@ The base integer ISA is named “I” (prefixed by RV32 or RV64 depending on int
 
 To know more about RISC-V check on this link [here](https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf).
 
+
+### Application Software on Hardware Flow 
+
+![app_to_hardware](./riscv_isa_labs/images/app_to_hard.png)
+
+When a C program needs to run on a hardware chip, it goes through a series of steps. First, the C program is turned into assembly language, specifically RISCV assembly language in this case. Then, this assembly language is transformed into machine language consisting of 0s and 1s. These binary instructions are what the chip understands and executes. There's a bridge between the RISCV assembly language and the physical layout of the chip. This bridge is made using Hardware Description Language, which is more closely related to the hardware's workings. To create a RISC specification, the architecture needs to be implemented in a way that registers transfer data. This process involves converting from RTL (Register Transfer Level) to the layout, a process known as RTL to GDSII flow. This ensures that all applications function properly on the hardware.
+
+To make an application work on the hardware, it has to pass through the software system. Here, the system software comes into play, which includes the Operating System (OS), compiler, and assembler. The OS handles tasks like input/output and memory allocation, while the compiler turns the high-level code (like C or C++) into a set of instructions. These instructions depend on the hardware's structure. For a RISC-V system, the instructions follow the RISC-V architecture. The assembler then takes these instructions and turns them into a binary form, which is basically a machine language program. This binary representation is what the hardware ultimately receives and processes. These instructions act as a link between the C language and the intricate hardware components. This link is formally called the Instruction Set Architecture (ISA). In hardware's language, only 0s and 1s make sense, and they serve as the foundation for communication between software and hardware.
+
+
 ```
 cd /home/kanish/RISCV-ISA/riscv_isa_labs/day_1/lab1
 riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o sum1ton_O1.o sum1ton.c
@@ -83,7 +94,7 @@ int main()
 
 
 To debug line by line
-``````
+```
 spike -d pk sum1ton_O1.o
 until pc 0 10184
 reg 0 sp
