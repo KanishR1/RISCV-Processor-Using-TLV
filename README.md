@@ -9,6 +9,7 @@
     * [Illustration of the RISC-V gnu toolchain](#illustration-of-the-risc-v-gnu-toolchain)
         + [O1 mode](#o1-mode)
         + [Ofast mode](#ofast-mode)
+    * [Data Representation](#data-representation)
 - [Day - 2 : ]
 - [Day - 3 : ]
 - [Day - 4 : ]
@@ -172,6 +173,7 @@ spike pk sum1ton_Ofast.o
 
 **Observation** - The same C code compiled in Ofast mode used less number of instruction compared to the O1 mode.
 
+### Data Representation
 
 
 ```
