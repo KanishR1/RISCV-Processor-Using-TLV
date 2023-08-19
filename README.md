@@ -74,6 +74,7 @@ To make an application work on the hardware, it has to pass through the software
 
 ### Illustration of the RISC-V 
 
+#### O1 mode 
 Consider the simple C program given below which calculates the sum of the number form 1 to n. 
 
 ```
@@ -96,8 +97,14 @@ riscv64-unknown-elf-objdump -d sum1ton_O1.o | less
 spike pk sum1ton_O1.o 
 ```
 
+**Output of the disassembled file**
+![O1](./riscv_isa_labs/day_1/lab1/images/O1.png)
+
+To view the address of the subroutine (line main() or printf()) type ```/main``` (if main()) or ```/printf```(if printf()).
+To quit type ```:q```.
+
 ___
-***Explanation of the code :***
+***Explanation of the commands :***
 
 **riscv64-unknown-elf-gcc** - RISC-V architecture based gcc compiler .
 
@@ -123,27 +130,32 @@ ___
 
 ___
 
-
-
 To debug line by line
 ```
 spike -d pk sum1ton_O1.o 
-
-# -d  --> indicates spike in debug mode. Debug mode enables you to closely monitor and interact with the simulated program's execution, making it useful for analyzing code behavior, identifying issues, and stepping through instructions.
-
 until pc 0 10184
-
-#continue executing the program until the program counter reaches address 10184. 
-
 reg 0 sp
-
-#Inquire about the value stored in register., in this case it is stack pointer (sp)
-
 #Press enter for line by line execution
-#To check the status of the particular register
 reg 0 a2
 ```
 
+___
+***Explanation of the commands :***
+
+**-d (in spike command)** - indicates spike in debug mode. Debug mode enables you to closely monitor and interact with the simulated program's execution, making it useful for analyzing code behavior, identifying issues, and stepping through instructions.
+
+**until pc 0 10184** - continue executing the program until the program counter reaches address 10184. 
+
+**reg 0 sp** - Inquire about the value stored in register., in this case it is stack pointer (sp)
+___
+
+**Output of the spike in debug mode is shown below :**
+![spike_debug](./riscv_isa_labs/day_1/lab1/images/spike_debug.png)
+
+#### Ofast mode
+Consider the same [C program](#o1-mode) given in the O1 mode.
+
+In order to map this command to riscv based assembly language compile it in Ofast mode using the riscv-gnu-toolchain shown below
 
 ```
 cd /home/kanish/RISCV-ISA/riscv_isa_labs/day_1/lab1
@@ -152,7 +164,10 @@ riscv64-unknown-elf-objdump -d sum1ton_Ofast.o | less
 spike pk sum1ton_Ofast.o 
 ```
 
+**Output of the disassembled file**
+![Ofast](./riscv_isa_labs/day_1/lab1/images/Ofast.png)
 
+**Observation** - The same C code compiled in Ofast mode used less number of instruction compared to the O1 mode.
 
 ```
 cd /home/kanish/RISCV-ISA/riscv_isa_labs/day_1/lab2
