@@ -288,6 +288,9 @@ spike  pk signedHighest.o
 **Output of the execution**
 ![signed](./riscv_isa_labs/day_1/lab2/images/signed_demo.png)
 
+**Different types of format specifiers**
+
+![format_Spec](./riscv_isa_labs/images/format_spec.png)
 
 
 
@@ -301,7 +304,9 @@ RV64I is the base integer instruction set for the 64-bit architecture, which bui
 
 There are 31 general-purpose registers x1–x31, which hold integer values. Register x0 is hardwired to the constant 0. There is no hardwired subroutine return address link register, but the standard software calling convention uses register x1 to hold the return address on a call. For RV32, the x registers are 32 bits wide, and for RV64, they are 64 bits wide. The term XLEN to refer to the current width of an x register in bits (either 32 or 64).
 
-![rrisc_reg_name](./riscv_isa_labs/images/riscv_reg_name.png)
+![risc_reg_name](./riscv_isa_labs/images/riscv_reg_name.png)
+
+![reg_func](./riscv_isa_labs/images/reg_func.png)
 
 In the RISC-V instruction set architecture, instructions are categorized into different formats based on their opcode and operand types. These formats are denoted by single-letter abbreviations. Here's an explanation of each type:
 
@@ -323,8 +328,60 @@ The instruction format for all types is shown below :
 
 To know more about the instructions check this [link](https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf).
 
+### Application Binary Interface (ABI)
+The ABI is a set of rules that govern how software components, like programs and libraries, interact with each other at the binary level. It defines things like how data is passed between different parts of a program, how function calls are made, and how data structures are organized in memory. The ABI ensures compatibility between different parts of a software ecosystem, making it possible for programs to work together seamlessly even if they're written in different languages or compiled by different compilers. The application program can directly access the registers of the RISC V architecture using system calls. The ABI also known as system call interface enables the application to access the hardware resources via registers.A system call is a specific request your program makes to the operating system to perform a task it can't do on its own. For example, if your program needs to read a file, it would make a system call to ask the operating system to read the file and give it the data. System calls are a way for programs to access the more powerful features of the operating system while staying within the rules defined by the ABI. The ISA is inherently divided into two parts: User & System ISA and User ISA the latter is available to the user directly by system calls.
 
 
+### Illustration of ABI
+Consider the C code given below which calculates the sum from 1 to 9 :
+```
+#include<stdio.h>
+
+extern int load(int x, int y);
+
+int main()
+{
+    int result = 0;
+    int count = 9;
+    result = load(0x0,count+1);
+    printf("Sum of numbers from 1 to %d is %d\n",count,result);
+    
+}
+```
+
+Consider the assembly code (ASM) given below :
+```
+.section .text 
+.global load
+.type load, @function
+
+load:
+    add a4, a0, zero
+    add a2, a0, a1
+    add a3, a0, zero
+loop : add a4, a3, a4
+       addi a3, a3, 1
+       blt a3, a2, loop
+       add a0, a4, zero
+       ret
+```
+The flow chart of the function performed by ASM code is shown below :
+![asm_flow](./riscv_isa_labs/day_2/lab1/images/asm_flow.png)
+
+To illustrate the ABI the C code shown above will send the values to the ASM code through the function load and the ASM code will perform the function and return the value to C code and the value is displayed by the C code.
+
+**Steps to perform the lab task mentioned above**
+```
+cd ~/RISCV-ISA/riscv_isa_labs/day_2/lab1/
+riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o custom1_to9.o custom1_to_9.c load.S
+riscv64-unknown-elf-objdump -d custom1_to9.o | less
+spike pk custom1_to9.o
+```
+
+**Outputs of the Lab**
+![spike_op](./riscv_isa_labs/day_2/lab1/images/spike_op_lab.png)
+
+![dump_op](./riscv_isa_labs/day_2/lab1/images/dump_op_lab.png)
 
 
 [Acknowledgement Section]:#
