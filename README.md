@@ -414,7 +414,10 @@ chmod 777 rv32im.sh
 1. Kunal Ghosh, VSD Corp. Pvt. Ltd.
 2. Sumanto Kar, Sr. Project Technical Assistant , IIT Bombay
 3. Alwin Shaju, Colleague IIITB
-4. Adam Teman, Associate Professor at Bar-Ilan University in Ramat Gan, Israel   
+4. Adam Teman, Associate Professor at Bar-Ilan University in Ramat Gan, Israel  
+5. Pruthvi Parate, Colleague IIITB
+6. Emil Jayanth Lal, Colleague IIITB
+7. Bhargav D V, Colleague IIITB 
 
 
 [Reference Section]:#
