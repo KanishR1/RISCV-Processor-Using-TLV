@@ -6,6 +6,9 @@
     * [Instruction Set Architecture (ISA)](#instruction-set-architecture-isa)
     * [RISC-V ISA](#riscv-isa)
     * [Application Software on Hardware flow](#application-software-on-hardware-flow)
+    * [Illustration of the RISC-V gnu toolchain](#illustration-of-the-risc-v-gnu-toolchain)
+        -[O1 mode](#o1-mode)
+        -[Ofast mode](#ofast-mode)
 - [Day - 2 : ]
 - [Day - 3 : ]
 - [Day - 4 : ]
@@ -72,7 +75,7 @@ When a C program needs to run on a hardware chip, it goes through a series of st
 
 To make an application work on the hardware, it has to pass through the software system. Here, the system software comes into play, which includes the Operating System (OS), compiler, and assembler. The OS handles tasks like input/output and memory allocation, while the compiler turns the high-level code (like C or C++) into a set of instructions. These instructions depend on the hardware's structure. For a RISC-V system, the instructions follow the RISC-V architecture. The assembler then takes these instructions and turns them into a binary form, which is basically a machine language program. This binary representation is what the hardware ultimately receives and processes. These instructions act as a link between the C language and the intricate hardware components. This link is formally called the Instruction Set Architecture (ISA). In hardware's language, only 0s and 1s make sense, and they serve as the foundation for communication between software and hardware.
 
-### Illustration of the RISC-V 
+### Illustration of the RISC-V gnu toolchain
 
 #### O1 mode 
 Consider the simple C program given below which calculates the sum of the number form 1 to n. 
@@ -168,6 +171,8 @@ spike pk sum1ton_Ofast.o
 ![Ofast](./riscv_isa_labs/day_1/lab1/images/Ofast.png)
 
 **Observation** - The same C code compiled in Ofast mode used less number of instruction compared to the O1 mode.
+
+
 
 ```
 cd /home/kanish/RISCV-ISA/riscv_isa_labs/day_1/lab2
