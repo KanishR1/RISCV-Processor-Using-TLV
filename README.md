@@ -10,6 +10,13 @@
         + [O1 mode](#o1-mode)
         + [Ofast mode](#ofast-mode)
     * [Data Representation](#data-representation)
+    * [Representation of Signed and Unsigned Numbers](#representation-of-signed-and-unsigned-numbers)
+        + [Signed Numbers](#signed-numbers)
+        + [Unsigned Numbers](#unsigned-numbers)
+    * [Illustration of Signed and Unsigned Numbers in RISC-V](#illustration-of-signed-and-unsigned-numbers-in-risc-v)
+        + [Unsigned Numbers](#unsigned-numbers-1)
+        + [Signed Numbers](#signed-numbers-1)
+        
 - [Day - 2 : ]
 - [Day - 3 : ]
 - [Day - 4 : ]
@@ -174,13 +181,39 @@ spike pk sum1ton_Ofast.o
 **Observation** - The same C code compiled in Ofast mode used less number of instruction compared to the O1 mode.
 
 ### Data Representation
+![data_rep](./riscv_isa_labs/images/data_rep.png)
+
+In RISC-V and computer architecture in general, several terms relate to data representation and storage. Let's explore them:
+
+1. **Byte:** - A byte is the fundamental unit of data storage and representation in computers. It consists of 8 bits and can represent a single character or value.
+
+2. **Word:** - A word typically refers to the natural data size that a processor operates with. In RISC-V, the term "word" can vary based on the architecture. For example, in RV32 (32-bit architecture), a word is 4 bytes (32 bits), while in RV64 (64-bit architecture), a word is 8 bytes (64 bits).
+
+3. **Double Word:** - A double word is twice the size of a word. In RISC-V, for example, in RV32, a double word is 8 bytes (64 bits), and in RV64, a double word is 16 bytes (128 bits).
+
+4. **Least Significant Bit (LSB):** -  The least significant bit is the lowest-order bit in a binary representation. 
+
+5. **Most Significant Bit (MSB):** -  The most significant bit is the highest-order bit in a binary representation. It has the greatest influence on the overall value of a number. The MSB is the bit that represents the largest power of two.
 
 
-```
-cd /home/kanish/RISCV-ISA/riscv_isa_labs/day_1/lab2
-riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o unsignedHighest.o unsignedHighest.c 
-spike  pk unsignedHighest.o 
-```
+6. **Endianess:** - Endianess refers to how multi-byte data is stored in memory. In a big-endian system, the most significant byte is stored at the lowest memory address, while in a little-endian system, the least significant byte is stored at the lowest memory address. RISC-V supports both big-endian and little-endian modes.
+
+Understanding these terms is crucial when working with data representation, memory allocation, and programming in computer systems, including the RISC-V architecture.
+
+7. **Byte addressing** -  is a memory addressing scheme used in computer systems to identify and access individual bytes of data within the computer's memory. In byte addressing, each individual byte in the memory has a unique address, allowing direct access to and manipulation of single bytes of data. In RISC-V, like in many other computer architectures, memory is byte-addressable.
+
+### Representation of Signed and Unsigned Numbers
+#### Unsigned Numbers
+Unsigned numbers don’t have any sign, these can contain only magnitude of the number. So, representation of unsigned binary numbers are all positive numbers only.
+Since there is no sign bit in this unsigned binary number, so N bit binary number represent its magnitude only. Zero (0) is also unsigned number. Every number in unsigned number representation has only one unique binary equivalent form, so this is unambiguous representation technique. The range of unsigned binary number is from  **0 to (2^n-1)**.
+
+#### Signed Numbers
+Generally 2's complement representation is used for the signed numbers. 2’s complement of a number is obtained by inverting each bit of given number plus 1 to least significant bit (LSB). So, positive numbers are represented in binary form and negative numbers are represented in 2’s complement form. There is extra bit for sign representation. If value of sign bit is 0, then number is positive and you can directly represent it in simple binary form, but if value of sign bit 1, then number is negative and 2’s complement of given binary number should be taken. In this representation, zero (0) has only one (unique) representation which is always positive. The range of 2’s complement form is from  **(-2^(n-1))  to ((2^(n-1))-1)**.
+
+### Illustration of Signed and Unsigned Numbers in RISC-V
+#### Unsigned Numbers
+
+Consider the C code given below which demostrates the maximum unsigned number the RV64I can store. 
 
 ```
 #include<stdio.h>
@@ -188,22 +221,45 @@ spike  pk unsignedHighest.o
 
 int main()
 {
-    unsigned long long int max = (unsigned long long int)(pow(2,64)-1);
-    // unsigned long long int max = (unsigned long long int)(pow(2,127)-1);
-    // unsigned long long int max = (unsigned long long int)(pow(2,64)*-1);
-    // unsigned long long int max = (unsigned long long int)(pow(-2,64)-1);
-    // unsigned long long int max = (unsigned long long int)(pow(-2,63)-1);
-    // unsigned long long int max = (unsigned long long int)(pow(2,10)-1);
+    unsigned long long int max = (unsigned long long int)(pow(2,64)-1); //Line 1
+    // unsigned long long int max = (unsigned long long int)(pow(2,127)-1);// Line 2
+    // unsigned long long int max = (unsigned long long int)(pow(2,64)*-1);// Line 3
+    // unsigned long long int max = (unsigned long long int)(pow(-2,64)-1);// Line 4
+    // unsigned long long int max = (unsigned long long int)(pow(-2,63)-1);// Line 5
+    // unsigned long long int max = (unsigned long long int)(pow(2,10)-1);// Line 6
     printf("Highest number represented by unsigned long long  int is %llu \n",max);
     return 0;
 }
 ```
+___
+***Note**
+**%llu** - is the format specifier for 64-bit unsigned integer.
+**%lld** - is the format specifier for 64-bit signed integer.
+
+Uncomment the lines in the code appropriately and view the result.
+___
+Line 1 will execute and give the result of (2^64)-1.</br>
+Line 2 will execute and give the result of (2^64)-1 instead of (2^127)-1 since the maximum unsigned value that can be stored in the 64 bit register is (2^64)-1.</br>
+Line 3 will execute and give the result of 0 instead of -(2^64) since the minimum unsigned value that can be stored in 64 bit register is 0.</br>
+Line 4 will execute and give the result of 0 instead of (2^64)-1.</br>
+Line 5 will execute and give the result of 0 instead of -(2^64) since the minimum unsigned value that can be stored in 64 bit register is 0.</br>
+Line 6 will execute and give the result of 1024 since the value of max is less that (2^64)-1.
+
+To compile and execute the C code in RISC-V gnu toolchain follow the steps given below:
 
 ```
 cd /home/kanish/RISCV-ISA/riscv_isa_labs/day_1/lab2
-riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o signedHighest.o unsignedHighest.c 
-spike  pk signedHighest.o 
+riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o unsignedHighest.o unsignedHighest.c 
+spike  pk unsignedHighest.o 
 ```
+
+**Output of the execution**
+![unsigned](./riscv_isa_labs/day_1/lab2/images/unsigned_demo.png)
+
+#### Signed Numbers
+
+Consider the C code given below which demostrates the maximum and minimum signed number the RV64I can store. 
+
 
 ```
 #include<stdio.h>
@@ -218,6 +274,15 @@ int main()
     return 0;
 }
 ```
+To compile and execute the C code in RISC-V gnu toolchain follow the steps given below:
+
+```
+cd /home/kanish/RISCV-ISA/riscv_isa_labs/day_1/lab2
+riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o signedHighest.o unsignedHighest.c 
+spike  pk signedHighest.o 
+```
+**Output of the execution**
+![signed](./riscv_isa_labs/day_1/lab2/images/unsigned_demo.png)
 
 [Acknowledgement Section]:#
 ## Acknowledgement
@@ -233,3 +298,4 @@ int main()
 2. https://www.arm.com/glossary/isa
 3. https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf
 4. https://gcc.gnu.org/onlinedocs/gcc/RISC-V-Options.html
+5. https://www.tutorialspoint.com/unsigned-and-signed-binary-numbers
