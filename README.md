@@ -3,6 +3,8 @@
 ## Table of Contents
 - [Day - 1 : Introduction to RISC-V ISA and GNU compiler toolchain](#day---1--introduction-to-risc-v-isa-and-gnu-compiler-toolchain)
     * [Tool Installation](#tool-installation)
+    * [Instruction Set Architecture (ISA)](#instruction-set-architecture-isa)
+    * [RISC-V ISA](#riscv-isa)
 - [Day - 2 : ]
 - [Day - 3 : ]
 - [Day - 4 : ]
