@@ -232,7 +232,7 @@ int main()
 }
 ```
 ___
-***Note***</br.>
+***Note***</br>
 
 **%llu** - is the format specifier for 64-bit unsigned integer.
 
