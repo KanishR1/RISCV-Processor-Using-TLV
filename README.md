@@ -240,12 +240,13 @@ ___
 
 Uncomment the lines in the code appropriately and view the result.
 ___
-Line 1 will execute and give the result of (2^64)-1.</br>
-Line 2 will execute and give the result of (2^64)-1 instead of (2^127)-1 since the maximum unsigned value that can be stored in the 64 bit register is (2^64)-1.</br>
-Line 3 will execute and give the result of 0 instead of -(2^64) since the minimum unsigned value that can be stored in 64 bit register is 0.</br>
-Line 4 will execute and give the result of 0 instead of (2^64)-1.</br>
-Line 5 will execute and give the result of 0 instead of -(2^64) since the minimum unsigned value that can be stored in 64 bit register is 0.</br>
-Line 6 will execute and give the result of 1024 since the value of max is less that (2^64)-1.
+
+- Line 1 will execute and give the result of (2^64)-1.</br>
+- Line 2 will execute and give the result of (2^64)-1 instead of (2^127)-1 since the maximum unsigned value that can be stored in the 64 bit register is (2^64)-1.</br>
+- Line 3 will execute and give the result of 0 instead of -(2^64) since the minimum unsigned value that can be stored in 64 bit register is 0.</br>
+- Line 4 will execute and give the result of 0 instead of (2^64)-1.</br>
+- Line 5 will execute and give the result of 0 instead of -(2^64) since the minimum unsigned value that can be stored in 64 bit register is 0.</br>
+- Line 6 will execute and give the result of 1024 since the value of max is less that (2^64)-1.
 
 To compile and execute the C code in RISC-V gnu toolchain follow the steps given below:
 
