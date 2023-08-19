@@ -7,8 +7,8 @@
     * [RISC-V ISA](#riscv-isa)
     * [Application Software on Hardware flow](#application-software-on-hardware-flow)
     * [Illustration of the RISC-V gnu toolchain](#illustration-of-the-risc-v-gnu-toolchain)
-        -[O1 mode](#o1-mode)
-        -[Ofast mode](#ofast-mode)
+        + [O1 mode](#o1-mode)
+        + [Ofast mode](#ofast-mode)
 - [Day - 2 : ]
 - [Day - 3 : ]
 - [Day - 4 : ]
