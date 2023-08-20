@@ -25,7 +25,16 @@
     * [Multiplexer using Ternary Operator](#day---3--digital-logic-with-tl-verilog-and-makerchip)
     * [Transaction Level (TL) - Verilog](#transaction-leveltl---verilog)
     * [Makerchip](#makerchip)
-    * [Basic Labs in Makerchip](#basic-labs-in-makerchip)
+    * [Basic Combinational Circuits in Makerchip](#basic-combinational-circuits-in-makerchip)
+        + [Pythagorean Example Demo](#pythagorean-example-demo)
+        + [Inverter](#inverter)
+        + [AND gate](#and-gate)
+        + [OR gate](#or-gate)
+        + [XOR gate](#xor-gate)
+        + [Vector Addition](#vector-addition)
+        + [2:1 Multiplexer](#21-multiplexer)
+        + [2:1 Vector Multiplexer](#21-vector-multiplexer)
+        + [Calculator](#calculator)
 - [Day - 4 : ]
 - [Day - 5 : ]
 - [Acknowledgement](#acknowledgement)
@@ -449,9 +458,9 @@ Makerchip IDE is an integrated development environment specifically designed for
 
 ![maker_chip](./riscv_isa_labs/images/maker_chip.png)
 
-### Basic Labs in Makerchip
+### Basic Combinational Circuits in Makerchip
 
-**Pythagorean Example Demo**
+#### **Pythagorean Example Demo**
 
 ___
 ***Note**</br>
@@ -461,7 +470,7 @@ ___
 
 ![demo_pytha](./riscv_isa_labs/day_3/lab1/images/demo_pytha.png)
 
-**Inverter**
+#### **Inverter**
 
 The TL-Verilog code is shown below :
 ```
@@ -470,7 +479,7 @@ The TL-Verilog code is shown below :
 
 ![demo_inv](./riscv_isa_labs/day_3/lab1/images/demo_inv.png)
 
-**AND gate**
+#### **AND gate**
 
 The TL-Verilog code is shown below :
 ```
@@ -478,7 +487,7 @@ The TL-Verilog code is shown below :
 ```
 ![demo_and](./riscv_isa_labs/day_3/lab1/images/demo_and.png)
 
-**OR gate**
+#### **OR gate**
 
 The TL-Verilog code is shown below :
 ```
@@ -487,7 +496,7 @@ The TL-Verilog code is shown below :
 ![demo_or](./riscv_isa_labs/day_3/lab1/images/demo_or.png)
 
 
-**XOR gate**
+#### **XOR gate**
 
 The TL-Verilog code is shown below :
 ```
@@ -495,7 +504,7 @@ The TL-Verilog code is shown below :
 ```
 ![demo_xor](./riscv_isa_labs/day_3/lab1/images/demo_xor.png)
 
-**Vector Addition**
+#### **Vector Addition**
 
 The TL-Verilog code is shown below :
 ```
@@ -503,7 +512,7 @@ The TL-Verilog code is shown below :
 ```
 ![demo_vec](./riscv_isa_labs/day_3/lab1/images/demo_vec.png)
 
-**2:1 Multiplexer**
+#### **2:1 Multiplexer**
 
 The TL-Verilog code is shown below :
 ```
@@ -511,13 +520,42 @@ The TL-Verilog code is shown below :
 ```
 ![demo_mux](./riscv_isa_labs/day_3/lab1/images/demo_2_mux.png)
 
-**2:1 Vector Multiplexer**
+#### **2:1 Vector Multiplexer**
 
 The TL-Verilog code is shown below :
 ```
    $out[7:0] = $sel ? $in1[7:0] : $in0[7:0];
 ```
 ![demo_2_mux_vec](./riscv_isa_labs/day_3/lab1/images/demo_2_vec_mux.png)
+
+#### **Calculator**
+
+The TL-Verilog code is shown below :
+```
+   $reset = *reset;
+   $op[1:0] = $random[1:0];
+   
+   $val1[31:0] = $rand1[3:0];
+   $val2[31:0] = $rand2[3:0];
+   $sum[31:0] = $val1+$val2;
+   $diff[31:0] = $val1-$val2;
+   $prod[31:0] = $val1*$val2;
+   $div[31:0] = $val1/$val2;
+   
+   $out[31:0] = $op[1] ? ($op[0] ? $div : $prod):($op[0] ? $diff : $sum);
+```
+The function table is given below :
+
+| Opcode | Function|
+| :------: | :-------: |
+| 2'b00 | Addition |
+| 2'b01 | Subtraction |
+| 2'b10 | Multiplication |
+| 2'b11 | Division |
+
+
+
+![demo_2_mux_vec](./riscv_isa_labs/day_3/lab1/images/demo_calc.png)
 
 
 
