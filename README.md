@@ -22,6 +22,7 @@
     * [Illustration of ABI](#illustration-of-abi)
 - [Day - 3 : Digital Logic with TL-Verilog and Makerchip](#day---3--digital-logic-with-tl-verilog-and-makerchip)
     * [Logic Gates](#logic-gates)
+    * [Multiplexer using Ternary Operator](#day---3--digital-logic-with-tl-verilog-and-makerchip)
 - [Day - 4 : ]
 - [Day - 5 : ]
 - [Acknowledgement](#acknowledgement)
