@@ -41,6 +41,7 @@
         + [Free Running Counter](#free-running-counter)
         + [Counter-Output with Calculator Integeration](#counter-output-with-calculator-integration)
         + [Sequential Calculator](#sequential-calculator)
+    * [Pipelining]
 - [Day - 4 : ]
 - [Day - 5 : ]
 - [Acknowledgement](#acknowledgement)
@@ -648,7 +649,66 @@ This code works like the normal calculator in which the result of the previous o
 ![seq_calc](./riscv_isa_labs/day_3/lab2/images/seq_calc.png)
 
 
+### Pipelining
+Pipelining is a technique used in computer architecture and digital system design to enhance the efficiency of processing by dividing a complex task into smaller, sequential stages. Each stage performs a specific operation on the data, and these stages are arranged in a pipeline. Pipelining enables multiple instructions or tasks to be executed concurrently, with different stages of different instructions being processed simultaneously. In a pipelined architecture, the processing of an instruction is divided into several stages. This allows for overlapping the execution of multiple instructions, reducing the overall time needed to complete a sequence of tasks.
 
+### Identifiers and Types in TL-Verilog
+![identi](./riscv_isa_labs/images/identi.png)
+
+TL-Verilog uses strict naming semantics. Always first token must start with two alpha characters. Identifiers can have basically three types of delimitation or casing.
+1. $lower_case - Pipe signal
+2. $CamelCase - State signal
+3. $Upper_CASE - Keyword signal
+
+The identifiers can have numbers at the end of tokens like $base64_value, but not $base_64.
+### Basic Pipelined Circuits
+
+#### Pipelined Pythagorean
+The TL-Verilog code is given below:
+```
+\m5_TLV_version 1d: tl-x.org
+\m5
+   
+   // =================================================
+   // Welcome!  New to Makerchip? Try the "Learn" menu.
+   // =================================================
+   
+   //use(m5-1.0)   /// uncomment to use M5 macro library.
+\SV
+   // Macro providing required top-level module definition, random
+   // stimulus support, and Verilator config.
+   m5_makerchip_module   // (Expanded in Nav-TLV pane.)
+   
+   `include "sqrt32.v"
+\TLV
+   $reset = *reset;
+   $aa = $rand1[3:0];
+   $bb = $rand2[3:0];
+   |calc
+      @1
+         $aa_sq[31:0] = $aa * $aa;
+      @2
+         $bb_sq[31:0] = $bb * $bb;
+      @3
+         $cc_sq[31:0] = $aa_sq + $bb_sq;
+      @4
+         $out[31:0] = sqrt($cc_sq);
+   
+   // Assert these to end simulation (before Makerchip cycle limit).
+   *passed = *cyc_cnt > 40;
+   *failed = 1'b0;
+\SV
+   endmodule
+```
+ ___
+ **@** - Represents the pipelined stage number.
+ 
+ **|** - Represent the code below are pipelined 
+ 
+ The square root code is given in sqrt32.v file, which is present by default in the makerchip ide.
+ ___
+
+ ![pipe_pytha](./riscv_isa_labs/day_3/lab2/images/pipe_pytha.png)
 
 
 [Acknowledgement Section]:#
