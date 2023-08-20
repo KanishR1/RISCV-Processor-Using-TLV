@@ -1,8 +1,8 @@
 # RISCV-ISA
 
 ## Table of Contents
-- [Day - 1 : Introduction to RISC-V ISA and GNU compiler toolchain](#day---1--introduction-to-risc-v-isa-and-gnu-compiler-toolchain)
-    * [Tool Installation](#tool-installation)
+- [Day - 1 : Introduction to Linking](#day---1--introduction-to-linking)
+    * [Test](#test)
     * [Instruction Set Architecture (ISA)](#instruction-set-architecture-isa)
     * [RISC-V ISA](#riscv-isa)
     * [Application Software on Hardware flow](#application-software-on-hardware-flow)
@@ -47,9 +47,9 @@
 - [Acknowledgement](#acknowledgement)
 - [References](#references)
 
-## Day - 1 : Introduction to RISC-V ISA and GNU compiler toolchain
+## Day - 1 : Introduction to Linking
 
-### Tool Installation
+### Test
 Install the dependencies using the following command :
 ```
 sudo apt-get install libboost-regex-dev
