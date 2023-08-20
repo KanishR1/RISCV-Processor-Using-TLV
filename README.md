@@ -710,8 +710,20 @@ The TL-Verilog code is given below:
 
  ![pipe_pytha](./riscv_isa_labs/day_3/lab2/images/pipe_pytha.png)
 
+#### Error Detection Demo
+The TL-Verilog code is given below :
+```
+|comp
+      @1
+         $err1 = $bad_input || $illegeal_op;
+      @3
+         $err2 = $err1 || $over_flow;
+      @6
+         $err3 = $err2 || $div_by_zer0;
 
+```
 
+![pipe_err](./riscv_isa_labs/day_3/lab2/images/error_demo.png)
 
 
 [Acknowledgement Section]:#
