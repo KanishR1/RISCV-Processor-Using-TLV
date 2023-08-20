@@ -46,6 +46,7 @@
     * [Basic Pipelined Circuits](#basic-pipelined-circuits)
         + [Pipelined Pythagorean](#pipelined-pythagorean)
         + [Error Detection Demo](#error-detection-demo)
+        + [Counter and Calculator in Pipeline](#counter-and-calculator-in-pipeline)
         + [2 Cycle Calculator](#2-cycle-calculator)
 - [Day - 4 : ]
 - [Day - 5 : ]
@@ -730,7 +731,40 @@ The TL-Verilog code is given below :
 
 ![pipe_err](./riscv_isa_labs/day_3/lab2/images/error_demo.png)
 
+#### Counter and Calculator in Pipeline
+The block diagram of the counter with calculator in pipeline is shown below :
+![counter_calc](./riscv_isa_labs/day_3/lab2/images/counter_calc.png)
+
+The TL-Verilog code is given below :
+```
+   $reset = *reset;
+   $op[1:0] = $random[1:0];
+   $val2[31:0] = $rand2[3:0];
+   
+   |calc
+      @1
+         $val1[31:0] = >>1$out;
+         $sum[31:0] = $val1+$val2;
+         $diff[31:0] = $val1-$val2;
+         $prod[31:0] = $val1*$val2;
+         $div[31:0] = $val1/$val2;
+         $out[31:0] = $reset ? 32'h0 : ($op[1] ? ($op[0] ? $div : $prod):($op[0] ? $diff : $sum));
+         
+         $cnt[31:0] = $reset ? 0 : (>>1$cnt + 1); 
+
+```
+
+![calc_cnt](./riscv_isa_labs/day_3/lab2/images/calc_cnt_pip.png)
+
 #### 2 Cycle Calculator
+The block diagram of the 2 cycle calculator is shown below:
+![2_cyc](./riscv_isa_labs/day_3/lab2/images/2_cyc_calc.png)
+
+
+
+
+
+
 
 [Acknowledgement Section]:#
 ## Acknowledgement
