@@ -20,7 +20,8 @@
     * [RV64I Base Integer Instruction Set](#rv64i-base-integer-instruction-set)
     * [Application Binary Interface (ABI)](#application-binary-interface-abi)
     * [Illustration of ABI](#illustration-of-abi)
-- [Day - 3 : ]
+- [Day - 3 : Digital Logic with TL-Verilog and Makerchip](#day---3--digital-logic-with-tl-verilog-and-makerchip)
+    * [Logic Gates](#logic-gates)
 - [Day - 4 : ]
 - [Day - 5 : ]
 - [Acknowledgement](#acknowledgement)
@@ -404,6 +405,19 @@ chmod 777 rv32im.sh
 ![rv_32im](./riscv_isa_labs/day_2/lab1/images/c_to_hex.png)
 
 ![firm](./riscv_isa_labs/day_2/lab1/images/firm.png)
+
+
+## Day - 3 : Digital Logic with TL-Verilog and Makerchip
+#### Logic Gates
+Logic gates are fundamental building blocks of digital electronic circuits. They are responsible for performing logical operations on input signals and producing output signals based on predefined logic rules. These gates are the foundation of digital computation and are used to design and construct more complex digital systems like processors, memory units, and controllers. Logic gates manipulate binary signals, which are typically represented as "0" and "1". These binary signals correspond to the low and high voltage levels in a digital circuit, respectively. Logic gates take one or more input signals and produce an output signal based on a logical function.
+
+Here are some common types of logic gates:
+![logic_gates](./riscv_isa_labs/images/logic_gates.png)
+
+These logic gates can be connected and complex circuits can be made. Two logic gates NAND and NOR gates are called as universal gates. With NAND and NOR gates all other logic gates can be made. The verilog representation of the logic gates is shown below :
+
+![ver_rep](./riscv_isa_labs/images/ver_rep.png)
+
 
 
 
