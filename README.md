@@ -46,6 +46,7 @@
     * [Basic Pipelined Circuits](#basic-pipelined-circuits)
         + [Pipelined Pythagorean](#pipelined-pythagorean)
         + [Error Detection Demo](#error-detection-demo)
+        + [2 Cycle Calculator](#2-cycle-calculator)
 - [Day - 4 : ]
 - [Day - 5 : ]
 - [Acknowledgement](#acknowledgement)
@@ -729,6 +730,7 @@ The TL-Verilog code is given below :
 
 ![pipe_err](./riscv_isa_labs/day_3/lab2/images/error_demo.png)
 
+#### 2 Cycle Calculator
 
 [Acknowledgement Section]:#
 ## Acknowledgement
