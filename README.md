@@ -35,6 +35,11 @@
         + [2:1 Multiplexer](#21-multiplexer)
         + [2:1 Vector Multiplexer](#21-vector-multiplexer)
         + [Calculator](#calculator)
+    * [Sequential Circuits](#sequential-circuits)
+    * [Basic Sequential Circuits in Makerchip](#basic-sequential-circuits-in-makerchip)
+        + [Fibonacci Series](#fibonacci-series)
+        + [Free Running Counter](#free-running-counter)
+        + [Counter-Output with Calculator Integeration](#counter-output-with-calculator-integration)
 - [Day - 4 : ]
 - [Day - 5 : ]
 - [Acknowledgement](#acknowledgement)
@@ -460,7 +465,7 @@ Makerchip IDE is an integrated development environment specifically designed for
 
 ### Basic Combinational Circuits in Makerchip
 
-#### **Pythagorean Example Demo**
+#### Pythagorean Example Demo
 
 ___
 ***Note**</br>
@@ -470,7 +475,7 @@ ___
 
 ![demo_pytha](./riscv_isa_labs/day_3/lab1/images/demo_pytha.png)
 
-#### **Inverter**
+#### Inverter
 
 The TL-Verilog code is shown below :
 ```
@@ -479,7 +484,7 @@ The TL-Verilog code is shown below :
 
 ![demo_inv](./riscv_isa_labs/day_3/lab1/images/demo_inv.png)
 
-#### **AND gate**
+#### AND gate
 
 The TL-Verilog code is shown below :
 ```
@@ -487,7 +492,7 @@ The TL-Verilog code is shown below :
 ```
 ![demo_and](./riscv_isa_labs/day_3/lab1/images/demo_and.png)
 
-#### **OR gate**
+#### OR gate
 
 The TL-Verilog code is shown below :
 ```
@@ -496,7 +501,7 @@ The TL-Verilog code is shown below :
 ![demo_or](./riscv_isa_labs/day_3/lab1/images/demo_or.png)
 
 
-#### **XOR gate**
+#### XOR gate
 
 The TL-Verilog code is shown below :
 ```
@@ -504,7 +509,7 @@ The TL-Verilog code is shown below :
 ```
 ![demo_xor](./riscv_isa_labs/day_3/lab1/images/demo_xor.png)
 
-#### **Vector Addition**
+#### Vector Addition
 
 The TL-Verilog code is shown below :
 ```
@@ -512,7 +517,7 @@ The TL-Verilog code is shown below :
 ```
 ![demo_vec](./riscv_isa_labs/day_3/lab1/images/demo_vec.png)
 
-#### **2:1 Multiplexer**
+#### 2:1 Multiplexer
 
 The TL-Verilog code is shown below :
 ```
@@ -520,7 +525,7 @@ The TL-Verilog code is shown below :
 ```
 ![demo_mux](./riscv_isa_labs/day_3/lab1/images/demo_2_mux.png)
 
-#### **2:1 Vector Multiplexer**
+#### 2:1 Vector Multiplexer
 
 The TL-Verilog code is shown below :
 ```
@@ -528,7 +533,7 @@ The TL-Verilog code is shown below :
 ```
 ![demo_2_mux_vec](./riscv_isa_labs/day_3/lab1/images/demo_2_vec_mux.png)
 
-#### **Calculator**
+#### Calculator
 
 The TL-Verilog code is shown below :
 ```
@@ -557,15 +562,65 @@ The function table is given below :
 
 ![demo_2_mux_vec](./riscv_isa_labs/day_3/lab1/images/demo_calc.png)
 
+### Sequential Circuits
+A sequential circuit is a type of digital circuit that employs memory elements to store information and produce outputs based not only on the current input values but also on the circuit's previous state. Unlike combinational circuits, which generate outputs solely based on the present input values, sequential circuits incorporate feedback loops and memory elements like flip-flops or registers to maintain and utilize their internal state.
 
 
+### Basic Sequential Circuits in Makerchip
+
+#### Fibonacci Series
+
+The TL-Verilog code for fibonacci series is shown below :
+```
+   $reset = *reset;
+   $num[31:0] = $reset ? 1 : (>>1$num + >>2$num);
+```
+
+___
+>>1 - Indicates the previous value of num
+>>2 - Value of num before 2 clock cycle
+___
+
+The block diagram of the fibonacci series generator is shown below :
+![fibo_block](./riscv_isa_labs/day_3/lab2/images/fibo_block.png)
+
+![fibo](./riscv_isa_labs/day_3/lab2/images/fibo.png)
+
+#### Free running counter
+
+The TL-Verilog code for fibonacci series is shown below :
+```
+   $reset = *reset;
+   $cnt[31:0] = $reset ? 0 : (>>1$cnt + 1);
+```
+The block diagram of the free running counter is shown below :
+![free_bd](./riscv_isa_labs/day_3/lab2/images/free_run_bd.png)
+
+![free](./riscv_isa_labs/day_3/lab2/images/free_run_counter.png)
 
 
+#### Counter-Output with Calculator  Integration
+The TL-Verilog code for fibonacci series is shown below :
+```
+   reset = *reset;
+   
+   $cnt1[31:0] = $reset ? 0 : (>>1$cnt1 + 3);
+   $cnt2[31:0] = $reset ? 0 : (>>1$cnt2 + 4);
+   $cnt3[1:0] = $reset ? 0 : (>>1$cnt3 + 1);
+   
+   $op[1:0] = $cnt3;
+   
+   $val1[31:0] = $cnt1;
+   $val2[31:0] = $cnt2;
+   $sum[31:0] = $val1+$val2;
+   $diff[31:0] = $val1-$val2;
+   $prod[31:0] = $val1*$val2;
+   $div[31:0] = $val1/$val2;
+   
+   $out[31:0] = $op[1] ? ($op[0] ? $div : $prod):($op[0] ? $diff : $sum);
+```
 
-
-
-
-
+[calc_int](./riscv_isa_labs/day_3/lab2/images/calc_int.png)
 
 
 
