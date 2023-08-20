@@ -23,6 +23,9 @@
 - [Day - 3 : Digital Logic with TL-Verilog and Makerchip](#day---3--digital-logic-with-tl-verilog-and-makerchip)
     * [Logic Gates](#logic-gates)
     * [Multiplexer using Ternary Operator](#day---3--digital-logic-with-tl-verilog-and-makerchip)
+    * [Transaction Level (TL) - Verilog](#transaction-leveltl---verilog)
+    * [Makerchip](#makerchip)
+    * [Basic Labs in Makerchip](#basic-labs-in-makerchip)
 - [Day - 4 : ]
 - [Day - 5 : ]
 - [Acknowledgement](#acknowledgement)
@@ -409,7 +412,7 @@ chmod 777 rv32im.sh
 
 
 ## Day - 3 : Digital Logic with TL-Verilog and Makerchip
-#### Logic Gates
+### Logic Gates
 Logic gates are fundamental building blocks of digital electronic circuits. They are responsible for performing logical operations on input signals and producing output signals based on predefined logic rules. These gates are the foundation of digital computation and are used to design and construct more complex digital systems like processors, memory units, and controllers. Logic gates manipulate binary signals, which are typically represented as "0" and "1". These binary signals correspond to the low and high voltage levels in a digital circuit, respectively. Logic gates take one or more input signals and produce an output signal based on a logical function.
 
 Here are some common types of logic gates:
@@ -420,7 +423,7 @@ These logic gates can be connected and complex circuits can be made. Two logic g
 ![ver_rep](./riscv_isa_labs/images/ver_rep.png)
 
 
-#### Multiplexer Using Ternary Operator
+### Multiplexer Using Ternary Operator
 Consider the verilog code for multiplexer gicen below :
 ```
 assign f = s ? x1 : x0;
@@ -437,6 +440,95 @@ assign f = sel[0] ? a : (sel[1] ? b : (sel[2] ? c : d));
 This code creates a priority for the inputs with input a getting the highest and input d getting the least. Instead of realizing as a single 4:1 multiplexer it will create a series of 2:1 multiplexers. In this case the sel is a one hot vector i.e, only one of the bit in the sel will be high at a time. The hardware realization is shown below :
 
 ![chaining_mux](./riscv_isa_labs/images/chaining_mux.png)
+
+### Transaction Level(TL) - Verilog
+TL-Verilog is a Verilog implementation of TL-X, a language extension that extends any HDL with transaction-level modeling. TL-Verilog was developed by Redwood EDA, and it's designed to enable more efficient and concise design representation while retaining compatibility with standard Verilog. It eliminates the need for the legacy language features of Verilog and introduces simpler syntax. TL-Verilog is specifically designed for modeling hardware and provides abstract context suited to hardware design with numerous benefits. It is built for the design process, not for the mere description of static designs. In transaction-level design, a transaction is an entity that moves through a microarchitecture and is operated upon and steered through the machinery by flow components such as pipelines, arbiters, and queues. TL-Verilog is the easiest way to write and edit Verilog with fewer bugs and is supported by Makerchip.
+
+### Makerchip IDE
+Makerchip IDE is an integrated development environment specifically designed for digital design and hardware description language (HDL) programming. It offers a comprehensive platform for engineers, students, and hobbyists to design, simulate, and test digital circuits and systems. Makerchip IDE stands out for its user-friendly interface and its ability to support various HDLs like TL Verilog, SystemVerilog, Verilog, and VHDL. Within the Makerchip IDE, users can design complex digital systems by using a combination of pre-built and custom logic elements such as logic gates, flip-flops, multiplexers, and more. It provides a virtual canvas where users can visually construct their designs by interconnecting these components. One of the notable features of Makerchip IDE is its real-time simulation capability, allowing users to simulate their designs and observe their behavior before moving on to actual hardware implementation. This virtual prototyping helps catch errors early and refine designs efficiently. Overall, Makerchip IDE serves as an invaluable tool for both beginners and experienced digital designers to explore, learn, and experiment with digital logic design, fostering innovation and advancement in the field of digital electronics.
+
+![maker_chip](./riscv_isa_labs/images/maker_chip.png)
+
+### Basic Labs in Makerchip
+
+**Pythagorean Example Demo**
+
+___
+***Note**</br>
+Unlike verilog, no need to declare $in and $out ports.
+In Maketrchip three space indentation must be preserved.
+___
+
+![demo_pytha](./riscv_isa_labs/day_3/lab1/images/demo_pytha.png)
+
+**Inverter**
+
+The TL-Verilog code is shown below :
+```
+   $out = $in;
+```
+
+![demo_inv](./riscv_isa_labs/day_3/lab1/images/demo_inv.png)
+
+**AND gate**
+
+The TL-Verilog code is shown below :
+```
+   $out = $in1 && $in2;
+```
+![demo_and](./riscv_isa_labs/day_3/lab1/images/demo_and.png)
+
+**OR gate**
+
+The TL-Verilog code is shown below :
+```
+   $out = $in1 || $in2;
+```
+![demo_or](./riscv_isa_labs/day_3/lab1/images/demo_or.png)
+
+
+**XOR gate**
+
+The TL-Verilog code is shown below :
+```
+   $out = $in1 ^ $in2;
+```
+![demo_xor](./riscv_isa_labs/day_3/lab1/images/demo_xor.png)
+
+**Vector Addition**
+
+The TL-Verilog code is shown below :
+```
+   $out[5:0] = $in1[4:0] + $in2[4:0];
+```
+![demo_vec](./riscv_isa_labs/day_3/lab1/images/demo_vec.png)
+
+**2:1 Multiplexer**
+
+The TL-Verilog code is shown below :
+```
+   $out = $sel ? $in1 : $in0;
+```
+![demo_mux](./riscv_isa_labs/day_3/lab1/images/demo_2_mux.png)
+
+**2:1 Vector Multiplexer**
+
+The TL-Verilog code is shown below :
+```
+   $out[7:0] = $sel ? $in1[7:0] : $in0[7:0];
+```
+![demo_2_mux_vec](./riscv_isa_labs/day_3/lab1/images/demo_2_vec_mux.png)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
