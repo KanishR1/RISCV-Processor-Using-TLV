@@ -54,7 +54,8 @@
         + [Distance Accumulator](#distance-accumulator)
         + [2 Cycle Calculator with Validity](#2-cycle-calculator-with-validity)
         + [Calculator with Single Value Memory](#calculator-with-single-value-memory)
-- [Day - 4 : ]
+- [Day - 4 : Building a RISC-V CPU core Micro-architecture](#day---4--building-a-risc-v-cpu-core-micro-architecture)
+
 - [Day - 5 : ]
 - [Acknowledgement](#acknowledgement)
 - [References](#references)
@@ -883,6 +884,29 @@ The TL-Verilog code is given below:
 
 ```
 ![calc_mem_o](./riscv_isa_labs/day_3/lab3/images/calc_mem_o.png)
+
+
+
+## Day - 4 : Building a RISC-V CPU core Micro-architecture
+The basic RISC-V CPU block diagram is shown below :
+
+![riscv_bld](./riscv_isa_labs/images/risc-v_block_diagram.png)
+
+**1. Program Counter (PC)** - The program counter is a special register in a CPU that keeps track of the memory address of the next instruction to be fetched and executed. It is incremented as instructions are fetched, and it provides the address to the instruction memory for fetching the next instruction in the program.
+
+**2. Instruction Decoder** - The instruction decoder is a circuit within the CPU that interprets the machine instructions fetched from memory. It decodes the binary representation of the instruction and generates control signals that govern the operation of other components in the CPU to execute the instruction.
+
+**3. Instruction Memory** - The instruction memory is a storage component that holds the machine instructions of a program. It is typically read-only and stores the binary instructions that the CPU fetches and decodes. The program counter provides the address to the instruction memory for fetching the next instruction.
+
+**4. Data Memory** - The data memory is a storage component used to store data that is manipulated by instructions during program execution. Unlike instruction memory, data memory can be both read from and written to. It holds variables, data arrays, and other information that the program uses during its execution.
+
+**5. ALU (Arithmetic Logic Unit)** - The ALU is a fundamental digital circuit within the CPU that performs arithmetic and logical operations on data. It can perform tasks such as addition, subtraction, multiplication, division, bitwise operations (AND, OR, XOR), and comparisons. The ALU generates results that are used in various computations specified by the instructions.
+
+**6. Read Register File** - The read register file is a component that stores a set of registers used to hold data during the execution of instructions. Instructions often involve reading data from these registers. The instruction specifies which registers to read, and the data from these registers can be used as operands for operations performed by the ALU or other components.
+
+**7. Write Register File** - The write register file is responsible for storing the results of operations back into registers. After an instruction is executed, the result is often written back to the register file. This ensures that the updated data is available for subsequent instructions.
+
+These components work together to execute machine instructions in a CPU. The program counter guides the instruction fetch process, the instruction decoder interprets instructions, the ALU performs computations, the register files hold data, and the memory components provide data storage and access. This orchestration allows a CPU to carry out the tasks required by a program's instructions.
 
 
 
