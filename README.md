@@ -778,6 +778,8 @@ The TL-verilog code is shown below :
          $out[31:0] = ($reset | ~($valid))  ? 32'h0 : ($op[1] ? ($op[0] ? $div : $prod):($op[0] ? $diff : $sum));
 ```
 
+![2_calc](./riscv_isa_labs/day_3/lab2/images/2_calc_op.png)
+
 
 
 
