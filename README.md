@@ -48,6 +48,8 @@
         + [Error Detection Demo](#error-detection-demo)
         + [Counter and Calculator in Pipeline](#counter-and-calculator-in-pipeline)
         + [2 Cycle Calculator](#2-cycle-calculator)
+    * [Validity](#validity)
+    * [Clock Gating](#clock-gating)
 - [Day - 4 : ]
 - [Day - 5 : ]
 - [Acknowledgement](#acknowledgement)
@@ -585,8 +587,8 @@ The TL-Verilog code for fibonacci series is shown below :
 ```
 
 ___
->>1 - Indicates the previous value of num
->>2 - Value of num before 2 clock cycle
+1 - Indicates the previous value of num
+2 - Value of num before 2 clock cycle
 ___
 
 The block diagram of the fibonacci series generator is shown below :
@@ -780,9 +782,103 @@ The TL-verilog code is shown below :
 
 ![2_calc](./riscv_isa_labs/day_3/lab2/images/2_calc_op.png)
 
+### Validity
+In Transaction-Level Verilog (TL-Verilog), validity is a concept used to track the state and timing of transactions within a design description. In TL-Verilog, transactions are used to represent higher-level actions or events that occur in a design. A transaction typically consists of a set of signals that represent the data and control information associated with that action. Validity, refers to whether a transaction is considered "valid" or "invalid" based on the state of its associated signals.
+### Clock Gating
+Clock gating is a power-saving technique used in digital circuit design to reduce power consumption by controlling the clock signal distribution to specific circuit blocks. The goal of clock gating is to minimize unnecessary clock transitions in parts of a circuit that are not actively performing computations or tasks, thus conserving energy. In digital systems, the clock signal is used to synchronize the operations of various components within the circuit. However, not all components need to be active and consuming power during every clock cycle. In fact, many components spend a significant amount of time in idle or low-power states. Clock gating takes advantage of this fact by selectively enabling or disabling the clock signal to certain portions of the circuit based on their activity status. The basic idea of clock gating involves inserting a logic gate (often an AND gate) in the clock path. The control signal for this gate determines whether the clock signal is allowed to pass through or not. If the control signal is active (high), the clock gate is open, and the clock signal reaches the circuit block. If the control signal is inactive (low), the clock gate is closed, effectively stopping the clock from reaching the circuit block.
 
+### Illustration of Validity
 
+#### Distance Accumulator
+The block diagram of the distance accumulator is shown below :
 
+![dist_acc](./riscv_isa_labs/day_3/lab3/images/dist_accu.png)
+
+The TL-Verilog code is given below:
+``` 
+    calc
+      @1
+         $reset = *reset;
+      ?$valid
+         @1
+            $aa_sq[31:0] = $aa[3:0] * $aa;
+            $bb_sq[31:0] = $bb[3:0] * $bb;
+         @2
+            $cc_sq[31:0] = $aa_sq + $bb_sq;
+         @3
+            $out[31:0] = sqrt($cc_sq);
+      @4
+         $tot_dist[31:0] = $reset ? '0 : ($valid ? (>>1$tot_dist + $out) : $RETAIN);
+```
+
+Once the valid signal is asserted the previous value of result will be added with the current value and it result will get updated otherwise the previous value is retained.
+
+![dist_acu](./riscv_isa_labs/day_3/lab3/images/dist_acu.png)
+
+#### 2 Cycle Calculator with Validity
+The block diagram of 2 Cycle calculator with validity is shown below :
+
+![2_cyc](./riscv_isa_labs/day_3/lab3/images/2_cyc_val.png)
+
+The TL-Verilog code is given below :
+```
+   $reset = *reset;
+   |calc
+      @1
+         $valid = $reset ? 0 : >>1$valid+1;
+         $valid_or_reset = $valid || $reset;
+      ?$valid_or_reset
+         @1
+            $val1[31:0] = >>2$out;
+            $sum[31:0] = $val1+$val2;
+            $diff[31:0] = $val1-$val2;
+            $prod[31:0] = $val1*$val2;
+            $div[31:0] = $val1/$val2;
+            $valid = $reset ? 0 : (>>1$valid + 1);
+         @2
+            $out[31:0] = $reset  ? 32'h0 : ($op[1] ? ($op[0] ? $div : $prod):($op[0] ? $diff : $sum));
+```
+
+![2_cyc_v](./riscv_isa_labs/day_3/lab3/images/2_cyc_v.png)
+
+#### Calculator with Single Value Memory
+The block diagram of calculator with single value memory is shown below :
+
+![calc_mem](./riscv_isa_labs/day_3/lab3/images/calc_mem.png)
+
+The TL-Verilog code is given below:
+```
+   |calc
+      @0
+         $reset = *reset;
+         
+      @1
+         $val1 [31:0] = >>2$out;
+         $val2 [31:0] = $rand2[3:0];
+         
+         $valid = $reset ? 1'b0 : >>1$valid + 1'b1 ;
+         $valid_or_reset = $valid || $reset;
+         
+      ?$vaild_or_reset
+         @1   
+            $sum [31:0] = $val1 + $val2;
+            $diff[31:0] = $val1 - $val2;
+            $prod[31:0] = $val1 * $val2;
+            $div[31:0] = $val1 / $val2;
+            
+         @2   
+            $mem[31:0] = $reset ? 32'b0 :
+                         ($op[2:0] == 3'b101) ? $val1 : >>2$mem ;
+            
+            $out [31:0] = $reset ? 32'b0 :
+                          ($op[2:0] == 3'b000) ? $sum :
+                          ($op[2:0] == 3'b001) ? $diff :
+                          ($op[2:0] == 3'b010) ? $prod :
+                          ($op[2:0] == 3'b011) ? $quot :
+                          ($op[2:0] == 3'b100) ? >>2$mem : >>2$out ;
+
+```
+![calc_mem_o](./riscv_isa_labs/day_3/lab3/images/calc_mem_o.png)
 
 
 
