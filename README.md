@@ -42,6 +42,10 @@
         + [Counter-Output with Calculator Integeration](#counter-output-with-calculator-integration)
         + [Sequential Calculator](#sequential-calculator)
     * [Pipelining]
+    * [Identifiers and Types in TL Verilog](#identifiers-and-types-in-tl-verilog)
+    * [Basic Pipelined Circuits](#basic-pipelined-circuits)
+        + [Pipelined Pythagorean](#pipelined-pythagorean)
+        + [Error Detection Demo](#error-detection-demo)
 - [Day - 4 : ]
 - [Day - 5 : ]
 - [Acknowledgement](#acknowledgement)
