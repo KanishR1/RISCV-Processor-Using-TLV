@@ -419,6 +419,24 @@ These logic gates can be connected and complex circuits can be made. Two logic g
 ![ver_rep](./riscv_isa_labs/images/ver_rep.png)
 
 
+#### Multiplexer Using Ternary Operator
+Consider the verilog code for multiplexer gicen below :
+```
+assign f = s ? x1 : x0;
+```
+This code uses ternary operator that will realize a simple 2:1 multiplexer hardware in which the output f follows x1 if s is 1 otherwise it will follow x0. The harware and logic gate representation l is shown below :
+
+![simp_mux](./riscv_isa_labs/images/simp_mux.png)
+
+The higher bit multiplexers can also be realized using the coditional operator. Consider the 4:1 multiplexer code given below :
+
+```
+assign f = sel[0] ? a : (sel[1] ? b : (sel[2] ? c : d));
+```
+This code creates a priority for the inputs with input a getting the highest and input d getting the least. Instead of realizing as a single 4:1 multiplexer it will create a series of 2:1 multiplexers. In this case the sel is a one hot vector i.e, only one of the bit in the sel will be high at a time. The hardware realization is shown below :
+
+![chaining_mux](./riscv_isa_labs/images/chaining_mux.png)
+
 
 
 
