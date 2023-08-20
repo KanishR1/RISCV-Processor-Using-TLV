@@ -40,6 +40,7 @@
         + [Fibonacci Series](#fibonacci-series)
         + [Free Running Counter](#free-running-counter)
         + [Counter-Output with Calculator Integeration](#counter-output-with-calculator-integration)
+        + [Sequential Calculator](#sequential-calculator)
 - [Day - 4 : ]
 - [Day - 5 : ]
 - [Acknowledgement](#acknowledgement)
@@ -588,7 +589,7 @@ The block diagram of the fibonacci series generator is shown below :
 
 #### Free running counter
 
-The TL-Verilog code for fibonacci series is shown below :
+The TL-Verilog code for free running counter is shown below :
 ```
    $reset = *reset;
    $cnt[31:0] = $reset ? 0 : (>>1$cnt + 1);
@@ -600,7 +601,7 @@ The block diagram of the free running counter is shown below :
 
 
 #### Counter-Output with Calculator  Integration
-The TL-Verilog code for fibonacci series is shown below :
+The TL-Verilog code is shown below :
 ```
    reset = *reset;
    
@@ -622,6 +623,29 @@ The TL-Verilog code for fibonacci series is shown below :
 
 [calc_int](./riscv_isa_labs/day_3/lab2/images/calc_int.png)
 
+#### Sequential Calculator
+The TL-verilog code for sequential calculator is shown below :
+```
+   $reset = *reset;
+   
+   $cnt2[2:0] = $reset ? 0 : (>>1$cnt2 + 1);
+   $cnt3[1:0] = $reset ? 0 : (>>1$cnt3 + 1);
+   
+   $op[1:0] = $cnt3;
+   
+   $val1[31:0] = >>1$out;
+   $val2[31:0] = $cnt2;
+   $sum[31:0] = $val1+$val2;
+   $diff[31:0] = $val1-$val2;
+   $prod[31:0] = $val1*$val2;
+   $div[31:0] = $val1/$val2;
+   
+   $out[31:0] = $reset ? 32'h0 : ($op[1] ? ($op[0] ? $div : $prod):($op[0] ? $diff : $sum));
+```
+
+This code works like the normal calculator in which the result of the previous operation is considered as one of the operand for the next operation. Upon reset the result becomes zero.
+
+![seq_calc](./riscv_isa_labs/day_3/lab2/images/seq_calc.png)
 
 
 
