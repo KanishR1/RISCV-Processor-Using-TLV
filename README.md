@@ -50,6 +50,10 @@
         + [2 Cycle Calculator](#2-cycle-calculator)
     * [Validity](#validity)
     * [Clock Gating](#clock-gating)
+    * [Illustration of Validity](#illustration-of-validity)
+        + [Distance Accumulator](#distance-accumulator)
+        + [2 Cycle Calculator with Validity](#2-cycle-calculator-with-validity)
+        + [Calculator with Single Value Memory](#calculator-with-single-value-memory)
 - [Day - 4 : ]
 - [Day - 5 : ]
 - [Acknowledgement](#acknowledgement)
