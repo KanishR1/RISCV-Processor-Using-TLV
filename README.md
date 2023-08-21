@@ -64,8 +64,8 @@
     * [Branch Instructions](#branch-instructions)
 
 - [Day - 5 : Complete Pipelined RISC-V CPU Micro-architecture](#day---5--complete-pipelined-risc-v-cpu-micro-architecture)
-    * [Hazard in Pipeling](#hazards-in-pipelinig)
-    * [Final 4 Stage Pipelining](#final-4-stage-pipelined-logic)
+   <!-- * [Hazard in Pipeling](#hazards-in-pipelinig)
+    * [Final 4 Stage Pipelining](#final-4-stage-pipelined-logic) -->
 - [Acknowledgement](#acknowledgement)
 - [References](#references)
 
@@ -1904,7 +1904,7 @@ To test the code using the testbech include the line in @1 stage :
 
 ## Day - 5 : Complete Pipelined RISC-V CPU Micro-architecture
 
-### Hazards in Pipelinig
+<!-- ### Hazards in Pipelinig
 Pipelining introduces certain hazards, which are situations that can potentially stall or disrupt the smooth execution of instructions. One of the most significant hazards is the "branch instruction hazard," also known as the "branch penalty."
 
 Branch instructions are used to alter the sequence of instructions being executed by the processor. They allow the program to make decisions, such as jumping to a different section of code depending on a certain condition. Branch instructions introduce hazards in pipelining due to the fact that the outcome of the branch (taken or not taken) is often determined later in the pipeline than the fetch and decode stages.
@@ -2150,7 +2150,7 @@ The TL-Verilog code to introduce valid signal for pipelined logic is given below
          $dmem_wr_data[31:0] = $src2_value ;
          $dmem_rd_en = $is_load ;
         
-      @5
+      @4
          //LOAD DATA
          $ld_data[31:0] = $dmem_rd_data ;
       @3
@@ -2227,20 +2227,23 @@ The TL-Verilog code to introduce valid signal for pipelined logic is given below
 
 ```
 
-![final_code](./riscv_isa_labs/day_5/images/final_code.png)
-
+![final_code](./riscv_isa_labs/day_5/images/final_code.png) -->
 
 
 
 [Acknowledgement Section]:#
 ## Acknowledgement
-1. Kunal Ghosh, VSD Corp. Pvt. Ltd.
-2. Sumanto Kar, Sr. Project Technical Assistant , IIT Bombay
-3. Alwin Shaju, Colleague IIITB
-4. Adam Teman, Associate Professor at Bar-Ilan University in Ramat Gan, Israel  
-5. Pruthvi Parate, Colleague IIITB
-6. Emil Jayanth Lal, Colleague IIITB
-7. Bhargav D V, Colleague IIITB 
+1.  Kunal Ghosh, VSD Corp. Pvt. Ltd.
+2.  Sumanto Kar, Sr. Project Technical Assistant , IIT Bombay
+3.  Alwin Shaju, Colleague IIITB
+4.  Adam Teman, Associate Professor at Bar-Ilan University in Ramat Gan, Israel  
+5.  Pruthvi Parate, Colleague IIITB
+6.  Emil Jayanth Lal, Colleague IIITB
+7.  Bhargav D V, Colleague IIITB 
+8.  Geetima Kachari, Assistant Professor NITS Mirza under Nemcare group of institutions
+9.  Shivani Shah, Hardware Architect
+10. Bala Dhinesh, Engineer Tenstorrent
+11. Steve Hoover, Founder of Redwood EDA, LLC
 
 
 [Reference Section]:#
@@ -2251,3 +2254,6 @@ The TL-Verilog code to introduce valid signal for pipelined logic is given below
 4. https://gcc.gnu.org/onlinedocs/gcc/RISC-V-Options.html
 5. https://www.tutorialspoint.com/unsigned-and-signed-binary-numbers
 6. https://book.rvemu.app/instruction-set/01-rv64i.html
+7. https://github.com/shivanishah269/risc-v-core
+8. https://github.com/RISCV-MYTH-WORKSHOP/RISC-V-CPU-Core-using-TL-Verilog
+9. https://github.com/stevehoover/RISC-V_MYTH_Workshop
