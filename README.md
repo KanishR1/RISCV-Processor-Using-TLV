@@ -63,7 +63,7 @@
     * [Register File Write](#register-file-write)
     * [Branch Instructions](#branch-instructions)
 
-- [Day - 5 : ]
+- [Day - 5 : Complete Pipelined RISC-V CPU Micro-architecture](#day---5--complete-pipelined-risc-v-cpu-micro-architecture)
 - [Acknowledgement](#acknowledgement)
 - [References](#references)
 
@@ -1897,6 +1897,13 @@ To test the code using the testbech include the line in @1 stage :
 *passed = |cpu/xreg[10]>>5$value == (1+2+3+4+5+6+7+8+9) ;
 ```
 ![sim_pass](./riscv_isa_labs/day_4/images/sim_pass.png)
+
+
+
+## Day - 5 : Complete Pipelined RISC-V CPU Micro-architecture
+
+
+
 
 
 [Acknowledgement Section]:#
