@@ -1892,7 +1892,7 @@ The TL-Verilog Code is given below :
 \SV
    endmodule
 ```
-![br](./riscv_isa_labs/day_4/images/.png)
+![br](./riscv_isa_labs/day_4/images/br.png)
 
 To test the code using the testbech include the line in @1 stage :
 ```
