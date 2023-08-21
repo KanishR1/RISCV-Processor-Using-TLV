@@ -64,6 +64,8 @@
     * [Branch Instructions](#branch-instructions)
 
 - [Day - 5 : Complete Pipelined RISC-V CPU Micro-architecture](#day---5--complete-pipelined-risc-v-cpu-micro-architecture)
+    * [Hazard in Pipeling](#hazards-in-pipelinig)
+    * [Final 4 Stage Pipelining](#final-4-stage-pipelined-logic)
 - [Acknowledgement](#acknowledgement)
 - [References](#references)
 
