@@ -41,7 +41,7 @@
         + [Free Running Counter](#free-running-counter)
         + [Counter-Output with Calculator Integeration](#counter-output-with-calculator-integration)
         + [Sequential Calculator](#sequential-calculator)
-    * [Pipelining]
+    * [Pipelining](#pipelining)
     * [Identifiers and Types in TL Verilog](#identifiers-and-types-in-tl-verilog)
     * [Basic Pipelined Circuits](#basic-pipelined-circuits)
         + [Pipelined Pythagorean](#pipelined-pythagorean)
