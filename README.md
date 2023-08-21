@@ -55,6 +55,13 @@
         + [2 Cycle Calculator with Validity](#2-cycle-calculator-with-validity)
         + [Calculator with Single Value Memory](#calculator-with-single-value-memory)
 - [Day - 4 : Building a RISC-V CPU core Micro-architecture](#day---4--building-a-risc-v-cpu-core-micro-architecture)
+    * [Program Counter](#program-counter)
+    * [Instruction Fetch](#instruction-fetch)
+    * [Instruction Decode](#instruction-decode)
+    * [Register File Read](#register-file-read)
+    * [ALU](#alu)
+    * [Register File Write](#register-file-write)
+    * [Branch Instructions](#branch-instructions)
 
 - [Day - 5 : ]
 - [Acknowledgement](#acknowledgement)
@@ -908,7 +915,7 @@ The basic RISC-V CPU block diagram is shown below :
 
 These components work together to execute machine instructions in a CPU. The program counter guides the instruction fetch process, the instruction decoder interprets instructions, the ALU performs computations, the register files hold data, and the memory components provide data storage and access. This orchestration allows a CPU to carry out the tasks required by a program's instructions.
 
-**Program Counter**
+### Program Counter
 The TL-Verilog code for the program counter is shown below :
 ```
 \m4_TLV_version 1d: tl-x.org
@@ -986,7 +993,7 @@ The TL-Verilog code for the program counter is shown below :
 ```
 ![pc](./riscv_isa_labs/day_4/images/pc.png)
 
-**Instruction Fetch**
+### Instruction Fetch
 The TL-Verilog code is shown below :
 ```
 \m4_TLV_version 1d: tl-x.org
@@ -1071,7 +1078,7 @@ The TL-Verilog code is shown below :
 ```
 ![if](./riscv_isa_labs/day_4/images/if.png)
 
-**Instruction Decode**
+### Instruction Decode
 The TL-Verilog code is given below :
 ```
 \m4_TLV_version 1d: tl-x.org
@@ -1214,7 +1221,7 @@ The TL-Verilog code is given below :
 ```
 ![id](./riscv_isa_labs/day_4/images/id.png)
 
-**Register File Read**
+### Register File Read
 The TL-Verilog code is given below :
 ```
 \m4_TLV_version 1d: tl-x.org
@@ -1372,7 +1379,7 @@ The TL-Verilog code is given below :
 ```
 ![rf](./riscv_isa_labs/day_4/images/rf.png)
 
-**ALU**
+### ALU
 The TL-Verilog Code is given below:
 ```
 \m4_TLV_version 1d: tl-x.org
@@ -1536,7 +1543,7 @@ The TL-Verilog Code is given below:
 ```
 ![alu](./riscv_isa_labs/day_4/images/alu.png)
 
-**Register File Write**
+### Register File Write
 The TL-Verilog code is given below :
 ```
 \m4_TLV_version 1d: tl-x.org
@@ -1705,7 +1712,7 @@ The TL-Verilog code is given below :
 ```
 ![rd](./riscv_isa_labs/day_4/images/rd.png)
 
-**Branch Instructions**
+### Branch Instructions
 The TL-Verilog Code is given below :
 ```
 \m4_TLV_version 1d: tl-x.org
@@ -1756,9 +1763,7 @@ The TL-Verilog Code is given below :
       // YOUR CODE HERE
       // ...
       @0
-         $pc[31:0] = >>1$reset ? 32'b0 :
-                     >>1$taken_branch ? >>1$br_target_pc :
-                     >>1$pc + 32'd4;
+         $pc[31:0] = >>1$reset ? 32'd0 : (>>1$taken_branch ? >>1$br_tgt_pc :  (>>1$pc+32'd4));
       @1
          //Instruction Fetch
          $imem_rd_en = !$reset;
@@ -1859,6 +1864,7 @@ The TL-Verilog Code is given below :
                          $is_bltu ? ($src1_value < $src2_value):
                          $is_bgeu ? ($src1_value >= $src2_value):
                                     1'b0;
+         `BOGUS_USE($taken_branch)
          $br_tgt_pc[31:0] = $pc + $imm;
       // Note: Because of the magic we are using for visualisation, if visualisation is enabled below,
       //       be sure to avoid having unassigned signals (which you might be using for random inputs)
@@ -1884,8 +1890,13 @@ The TL-Verilog Code is given below :
 \SV
    endmodule
 ```
-![br](./riscv_isa_labs/day_4/images/br.png)
+![br](./riscv_isa_labs/day_4/images/.png)
 
+To test the code using the testbech include the line in @1 stage :
+```
+*passed = |cpu/xreg[10]>>5$value == (1+2+3+4+5+6+7+8+9) ;
+```
+![sim_pass](./riscv_isa_labs/day_4/images/sim_pass.png)
 
 
 [Acknowledgement Section]:#
