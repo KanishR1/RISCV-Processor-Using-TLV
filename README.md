@@ -64,8 +64,8 @@
     * [Branch Instructions](#branch-instructions)
 
 - [Day - 5 : Complete Pipelined RISC-V CPU Micro-architecture](#day---5--complete-pipelined-risc-v-cpu-micro-architecture)
-   <!-- * [Hazard in Pipeling](#hazards-in-pipelinig)
-    * [Final 4 Stage Pipelining](#final-4-stage-pipelined-logic) -->
+    * [Hazard in Pipeling](#hazards-in-pipelinig)
+    * [Final 4 Stage Pipelining](#final-4-stage-pipelined-logic) 
 - [Acknowledgement](#acknowledgement)
 - [References](#references)
 
@@ -1904,7 +1904,7 @@ To test the code using the testbech include the line in @1 stage :
 
 ## Day - 5 : Complete Pipelined RISC-V CPU Micro-architecture
 
-<!-- ### Hazards in Pipelinig
+### Hazards in Pipelinig
 Pipelining introduces certain hazards, which are situations that can potentially stall or disrupt the smooth execution of instructions. One of the most significant hazards is the "branch instruction hazard," also known as the "branch penalty."
 
 Branch instructions are used to alter the sequence of instructions being executed by the processor. They allow the program to make decisions, such as jumping to a different section of code depending on a certain condition. Branch instructions introduce hazards in pipelining due to the fact that the outcome of the branch (taken or not taken) is often determined later in the pipeline than the fetch and decode stages.
@@ -2227,7 +2227,7 @@ The TL-Verilog code to introduce valid signal for pipelined logic is given below
 
 ```
 
-![final_code](./riscv_isa_labs/day_5/images/final_code.png) -->
+![final_code](./riscv_isa_labs/day_5/images/final_code.png) 
 
 
 
